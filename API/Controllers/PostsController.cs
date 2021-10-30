@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using Domain;
@@ -18,7 +19,7 @@ namespace API.Controllers
     }
 
     /// <summary>
-    /// GET api/posts 
+    /// GET api/posts
     /// </summary>
     /// <returns>A list of posts</returns>
     [HttpGet]
@@ -36,6 +37,33 @@ namespace API.Controllers
     public ActionResult<Post> GetById(Guid id)
     {
         return this.context.Posts.Find(id);
+    }
+
+    /// <summary>
+    /// POST api/post
+    /// </summary>
+    /// <param name="request">JSON request containing post fields</param>
+    /// <returns>A new post</returns>
+    [HttpPost]
+    public ActionResult<Post> Create([FromBody] Post request)
+    {
+        var post = new Post
+        {
+            Id = request.Id,
+            Title = request.Title,
+            Body = request.Body,
+            Date = request.Date
+        };
+
+        context.Posts.Add(post);
+        var success = context.SaveChanges() > 0;
+
+        if (success)
+        {
+            return post;
+        }
+
+        throw new Exception("Error creating post");
     }
   }
 }
