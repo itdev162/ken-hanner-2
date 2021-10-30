@@ -76,7 +76,7 @@ namespace API.Controllers
     {
         var post = context.Posts.Find(request.Id);
 
-        if (post == null)
+        if (post == null) 
         {
             throw new Exception("Could not find post");
         }
