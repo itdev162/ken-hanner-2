@@ -53,7 +53,7 @@ class App extends React.Component {
   };
 
   onPostCreated = post => {
-    const newPots = [...this.state.posts, post];
+    const newPosts = [...this.state.posts, post];
 
     this.setState({
       posts: newPosts

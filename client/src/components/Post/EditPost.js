@@ -77,3 +77,5 @@ const EditPost = ({ post, onPostUpdated }) => {
         </div>
     );
 };
+
+export default EditPost;
